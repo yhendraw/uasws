@@ -1,0 +1,34 @@
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="css/ionic.css">
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+        var url = "https://myakademik.xyz/json-mahasiswa.php";
+        $.getJSON(url, function(result) {
+            console.log(result);
+            $.each(result, function(i, field) {
+                var id = field.id;
+                var nim = field.nim;
+                var nama = field.nama;
+                var prodi = field.prodi;
+                $("#listview").append("<a class='item' href='form-mahasiswa.html?id=" + id + "&nim=" + nim + "&nama=" + nama + "&prodi=" + prodi + "'><span class='item-note'>$" + prodi + "</span><h2>" + nim + " </h2><p>" + nama + "</p></a>");
+            });
+        });
+    });
+    </script>
+</head>
+
+<body>
+    <div class="bar bar-header bar-positive" style="margin-bottom:80px;">
+        <a href="index.html" class="button button-clear">Home</a>
+        <h1 class="title">Read Database (JSON)</h1>
+    </div>
+    <br/>
+    <br/>
+    <ul class="list" id="listview">
+    </ul>
+</body>
+
+</html>
