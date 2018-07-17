@@ -1,0 +1,66 @@
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="css/ionic.css">
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+        $("#insert").click(function() {
+            var nama_buku = $("#nama_buku").val();
+            var isbn = $("#isbn").val();
+            var penerbit = $("#penerbit").val();
+            var dataString = "nama_buku=" + nama_buku + "&isbn=" + isbn + "&penerbit=" + penerbit + "&insert=";
+            if ($.trim(nama_buku).length > 0 & $.trim(isbn).length > 0 & $.trim(penerbit).length > 0) {
+                $.ajax({
+                    type: "POST",
+                    url: "https://perpustakaan.infoakademik.xyz/insert-buku.php",
+                    data: dataString,
+                    crossDomain: true,
+                    cache: false,
+                    beforeSend: function() {
+                        $("#insert").val('Connecting...');
+                    },
+                    success: function(data) {
+                        if (data == "success") {
+                            alert("inserted");
+                            $("#insert").val('submit');
+                        } else if (data == "error") {
+                            alert("error");
+                        }
+                    }
+                });
+            }
+            return false;
+        });
+    });
+    </script>
+</head>
+
+<body>
+    <div class="bar bar-header bar-positive" style="margin-bottom:80px;">
+        <h1 class="title">Insert Database</h1>
+        <a class="button button-clear" href="readjson-buku.html">List Buku</a>
+    </div>
+    <br/>
+    <br/>
+    <div class="list">
+        <input type="hidden" id="id_buku" value="" />
+        <div class="item">
+            <label>Nama Buku</label>
+            <input type="text" id="nama_buku" value="" />
+        </div>
+        <div class="item">
+            <label>ISBN</label>
+            <input type="text" id="isbn" value="" />
+        </div>
+        <div class="item">
+            <label>Penerbit</label>
+            <input type="text" id="penerbit" value="" />
+        </div>
+        <div class="item">
+            <input type="button" id="insert" class="button button-block" value="Insert" />
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,34 @@
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="css/ionic.css">
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+        var url = "https://perpustakaan.infoakademik.xyz/json-anggota.php";
+        $.getJSON(url, function(result) {
+            console.log(result);
+            $.each(result, function(i, field) {
+                var id_anggota = field.id_anggota;
+                var nama_anggota = field.nama_buku;
+                var isbn = field.isbn;
+                var penerbit = field.penerbit;
+                $("#listview").append("<a class='item' href='form-buku.html?id=" + id_buku + "&nama_buku=" + nama_buku + "&isbn=" + isbn + "&penerbit=" + penerbit + "'><span class='item-note'>$" + nama_buku + "</span><h2>" + isbn + " </h2><p>" + penerbit + "</p></a>");
+            });
+        });
+    });
+    </script>
+</head>
+
+<body>
+    <div class="bar bar-header bar-positive" style="margin-bottom:80px;">
+        <a href="index.html" class="button button-clear">Home</a>
+        <h1 class="title">List Buku</h1>
+    </div>
+    <br/>
+    <br/>
+    <ul class="list" id="listview">
+    </ul>
+</body>
+
+</html>
